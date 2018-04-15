@@ -1,0 +1,10 @@
+.idea
+node_modules/
+dist/*
+npm-debug.log
+*.js
+*.map
+*.d.ts
+*.metadata.json
+dist.tgz
+**/*.ngfactory.ts

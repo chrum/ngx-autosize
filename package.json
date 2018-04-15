@@ -1,0 +1,40 @@
+{
+  "name": "ngx-autosize",
+  "version": "1.0.0",
+  "description": "Directive that automatically adjusts textarea height to fit content",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrum/ngx-autosize"
+  },
+  "scripts": {
+    "build": "ng-packagr -p package.json"
+  },
+  "keywords": [
+    "ng2",
+    "angular",
+    "angular2",
+    "autosize",
+    "textarea",
+    "elastic",
+    "height",
+    "@angular",
+    "ionic"
+  ],
+  "author": {
+    "name": "Chrystian Ruminowicz",
+    "email": "chrystianr@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@angular/compiler": ">=2.4.7",
+    "@angular/compiler-cli": ">=2.4.7",
+    "@angular/core": ">=2.4.7",
+    "ng-packagr": "^2.4.2",
+    "typescript": ">=2.2.1 <2.5.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  }
+}
