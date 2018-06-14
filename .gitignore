@@ -1,4 +1,5 @@
 .idea
+apps/
 node_modules/
 dist/*
 npm-debug.log

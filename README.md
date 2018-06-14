@@ -46,6 +46,17 @@ Use directly inside your HTML templates
 </ion-textarea>
 ```
 
+## Settings
+##### [minRows] 
+Sets minimal amount of rows of the textarea
+##### [maxRows]
+Sets maximum rows count after which autosizing if turned off and scrollbar appears
+```
+<textarea autosize [minRows]="5" [maxRows]="10">
+    Hello, this is an example of Autosize in Angular2.
+</textarea>
+```
+
 ## Authors
 
 [Steve Papa](https://stevepapa.com)
