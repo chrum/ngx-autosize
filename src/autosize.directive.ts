@@ -1,11 +1,11 @@
-import {ElementRef, HostListener, Directive, Input} from '@angular/core';
+import {ElementRef, HostListener, Directive, Input, AfterViewInit } from '@angular/core';
 
 const MAX_LOOKUP_RETRIES = 3;
 @Directive({
     selector: '[autosize]'
 })
 
-export class Autosize {
+export class Autosize implements AfterViewInit {
     @Input() minRows: number;
     @Input() maxRows: number;
 
@@ -37,7 +37,7 @@ export class Autosize {
             }
         }
     }
-    ngAfterContentChecked(): void{
+    ngAfterViewInit(): void{
         this.adjust();
     }
     adjust(): void {
