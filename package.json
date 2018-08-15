@@ -1,6 +1,6 @@
 {
   "name": "ngx-autosize",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Directive that automatically adjusts textarea height to fit content",
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "@angular/compiler-cli": ">=2.4.7",
     "@angular/core": ">=2.4.7",
     "ng-packagr": "^2.4.2",
-    "typescript": ">=2.2.1 <2.5.0"
+    "tsickle": "^0.27.5",
+    "typescript": ">=2.7.2 <2.10.0"
   },
   "ngPackage": {
     "lib": {

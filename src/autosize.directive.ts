@@ -42,22 +42,28 @@ export class Autosize {
     }
     adjust(): void {
         if (this.textAreaEl) {
-            let area = this.textAreaEl;
-            area.style.overflow = 'hidden';
-            area.style.height = 'auto';
+            let clone = this.textAreaEl.cloneNode(true);
+            let parent = this.textAreaEl.parentElement;
+            clone.style.visibility = 'hidden';
+            parent.appendChild(clone);
+
+            clone.style.overflow = 'hidden';
+            clone.style.height = 'auto';
 
             let lineHeight = this._getLineHeight();
-            let height = area.scrollHeight;
+            let height = clone.scrollHeight;
             let rowsCount = height / lineHeight;
             if (this.minRows && this.minRows >= rowsCount) {
-                area.style.overflow = 'auto';
+                clone.style.overflow = 'auto';
                 height = this.minRows * lineHeight;
 
             } else if(this.maxRows && this.maxRows <= rowsCount) {
-                area.style.overflow = 'auto';
+                clone.style.overflow = 'auto';
                 height = this.maxRows * lineHeight;
             }
-            area.style.height = height + "px";
+
+            this.textAreaEl.style.height = height + 'px';
+            parent.removeChild(clone);
         }
     }
 
