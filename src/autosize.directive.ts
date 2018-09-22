@@ -9,12 +9,13 @@ export class Autosize {
     @Input() minRows: number;
     @Input() maxRows: number;
 
-    @HostListener('input',['$event.target'])
+    private retries = 0;
+    private textAreaEl: any;
+
+    @HostListener('input', ['$event.target'])
     onInput(textArea: HTMLTextAreaElement): void {
         this.adjust();
     }
-    private retries: number = 0;
-    private textAreaEl: any;
     constructor(public element: ElementRef) {
         if (this.element.nativeElement.tagName !== 'TEXTAREA') {
             this._findNestedTextArea();
@@ -24,10 +25,15 @@ export class Autosize {
         }
     }
     _findNestedTextArea() {
-        this.textAreaEl = this.element.nativeElement.getElementsByTagName('TEXTAREA')[0];
+        this.textAreaEl = this.element.nativeElement.querySelector('TEXTAREA');
+
+        if (!this.textAreaEl && this.element.nativeElement.shadowRoot) {
+            this.textAreaEl = this.element.nativeElement.shadowRoot.querySelector('TEXTAREA');
+        }
+
         if (!this.textAreaEl) {
             if (this.retries >= MAX_LOOKUP_RETRIES) {
-                console.warn('angular2-autosize: textarea not found');
+                console.warn('ngx-autosize: textarea not found');
 
             } else {
                 this.retries++;
@@ -37,27 +43,27 @@ export class Autosize {
             }
         }
     }
-    ngAfterContentChecked(): void{
+    ngAfterContentChecked(): void {
         this.adjust();
     }
     adjust(): void {
         if (this.textAreaEl) {
-            let clone = this.textAreaEl.cloneNode(true);
-            let parent = this.textAreaEl.parentElement;
+            const clone = this.textAreaEl.cloneNode(true);
+            const parent = this.textAreaEl.parentNode;
             clone.style.visibility = 'hidden';
             parent.appendChild(clone);
 
             clone.style.overflow = 'hidden';
             clone.style.height = 'auto';
 
-            let lineHeight = this._getLineHeight();
+            const lineHeight = this._getLineHeight();
             let height = clone.scrollHeight;
-            let rowsCount = height / lineHeight;
+            const rowsCount = height / lineHeight;
             if (this.minRows && this.minRows >= rowsCount) {
                 clone.style.overflow = 'auto';
                 height = this.minRows * lineHeight;
 
-            } else if(this.maxRows && this.maxRows <= rowsCount) {
+            } else if (this.maxRows && this.maxRows <= rowsCount) {
                 clone.style.overflow = 'auto';
                 height = this.maxRows * lineHeight;
             }
@@ -70,8 +76,8 @@ export class Autosize {
     private _getLineHeight() {
         let lineHeight = parseInt(this.textAreaEl.style.lineHeight, 10);
         if (isNaN(lineHeight)) {
-            let fontSize = window.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
-            lineHeight = Math.floor(parseInt(fontSize.replace('px','')) * 1.5);
+            const fontSize = window.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
+            lineHeight = Math.floor(parseInt(fontSize.replace('px',''), 10) * 1.5);
         }
 
         return lineHeight;
