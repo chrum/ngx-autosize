@@ -3,13 +3,8 @@
 ***ngx-autosize*** is an Angular2+ directive that automatically adjusts textarea height to fit its content.
 
 It adjusts the textarea height automatically to any text input, or changes to the model bound to the textarea.
-
-## Origins
-This small lib is based on great
-[http://stevepapa.com/angular2-autosize](http://stevepapa.com/angular2-autosize)
-which is unfortunatelly not maintained and abandoned :(. On top of some small tweaks ***this lib adds***
-- AOT support
-- nested textarea lookup so it is possible to use it with [Ionics](http://ionicframework.com/) <ion-textarea>
+- Production builds ready (AOT support)
+- Works with [Ionic](http://ionicframework.com/) (shadow dom of v4 too)
 
 ## Installation:
 
@@ -56,6 +51,11 @@ Sets maximum rows count after which autosizing if turned off and scrollbar appea
     Hello, this is an example of Autosize in Angular2.
 </textarea>
 ```
+
+## Origins
+This small lib is based on great
+[http://stevepapa.com/angular2-autosize](http://stevepapa.com/angular2-autosize)
+which is unfortunatelly not maintained and abandoned :(
 
 ## Authors
 
