@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/ngx-autosize.svg)](https://badge.fury.io/js/ngx-autosize)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![](https://data.jsdelivr.com/v1/package/npm/ngx-autosize/badge?style=rounded)](https://www.jsdelivr.com/package/npm/ngx-autosize)
 # ngx-autosize
 
 ***ngx-autosize*** is an Angular2+ directive that automatically adjusts textarea height to fit its content.
