@@ -1,11 +1,13 @@
 {
   "name": "ngx-autosize",
-  "version": "1.2.1",
+  "homepage": "https://chrum.it/pages/ngx-autosize",
+  "version": "1.2.3",
   "description": "Directive that automatically adjusts textarea height to fit content",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chrum/ngx-autosize"
   },
+  "private": false,
   "scripts": {
     "build": "ng-packagr -p package.json"
   },

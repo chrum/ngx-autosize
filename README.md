@@ -9,6 +9,8 @@ It adjusts the textarea height automatically to any text input, or changes to th
 - Production builds ready (AOT support)
 - Works with [Ionic](http://ionicframework.com/) (shadow dom of v4 too)
 
+Check the demo [here](https://chrum.it/pages/ngx-autosize)
+
 ## Installation:
 
 ```bash
