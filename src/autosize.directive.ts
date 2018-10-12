@@ -1,11 +1,11 @@
-import {ElementRef, HostListener, Directive, Input} from '@angular/core';
+import {ElementRef, HostListener, Directive, Input, AfterContentChecked} from '@angular/core';
 
 const MAX_LOOKUP_RETRIES = 3;
 @Directive({
     selector: '[autosize]'
 })
 
-export class Autosize {
+export class AutosizeDirective implements AfterContentChecked {
     @Input() minRows: number;
     @Input() maxRows: number;
 
@@ -22,6 +22,7 @@ export class Autosize {
 
         } else {
             this.textAreaEl = this.element.nativeElement;
+            this.textAreaEl.style.overflow = 'hidden';
         }
     }
     _findNestedTextArea() {
@@ -41,7 +42,9 @@ export class Autosize {
                     this._findNestedTextArea();
                 }, 100);
             }
+            return;
         }
+        this.textAreaEl.style.overflow = 'hidden';
     }
     ngAfterContentChecked(): void {
         this.adjust();
@@ -53,19 +56,23 @@ export class Autosize {
             clone.style.visibility = 'hidden';
             parent.appendChild(clone);
 
-            clone.style.overflow = 'hidden';
+            clone.style.overflow = 'auto';
             clone.style.height = 'auto';
 
             const lineHeight = this._getLineHeight();
             let height = clone.scrollHeight;
             const rowsCount = height / lineHeight;
             if (this.minRows && this.minRows >= rowsCount) {
-                clone.style.overflow = 'auto';
+                // clone.style.overflow = 'auto';
                 height = this.minRows * lineHeight;
 
             } else if (this.maxRows && this.maxRows <= rowsCount) {
-                clone.style.overflow = 'auto';
+                // clone.style.overflow = 'auto';
                 height = this.maxRows * lineHeight;
+                this.textAreaEl.style.overflow = 'auto';
+
+            } else {
+                this.textAreaEl.style.overflow = 'hidden';
             }
 
             this.textAreaEl.style.height = height + 'px';
@@ -75,9 +82,14 @@ export class Autosize {
 
     private _getLineHeight() {
         let lineHeight = parseInt(this.textAreaEl.style.lineHeight, 10);
+        if (isNaN(lineHeight) && window.getComputedStyle) {
+            const styles = window.getComputedStyle(this.textAreaEl);
+            lineHeight = parseInt(styles.lineHeight, 10);
+        }
+
         if (isNaN(lineHeight)) {
             const fontSize = window.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
-            lineHeight = Math.floor(parseInt(fontSize.replace('px',''), 10) * 1.5);
+            lineHeight = Math.floor(parseInt(fontSize.replace('px', ''), 10) * 1.2);
         }
 
         return lineHeight;
