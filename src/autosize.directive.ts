@@ -54,6 +54,7 @@ export class AutosizeDirective implements AfterContentChecked {
             const clone = this.textAreaEl.cloneNode(true);
             const parent = this.textAreaEl.parentNode;
             clone.style.visibility = 'hidden';
+            clone.style.display = 'fixed';
             parent.appendChild(clone);
 
             clone.style.overflow = 'auto';
