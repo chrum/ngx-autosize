@@ -11,6 +11,7 @@ export class AutosizeDirective implements AfterContentChecked {
 
     private retries = 0;
     private textAreaEl: any;
+    private oldContent: string;
 
     @HostListener('input', ['$event.target'])
     onInput(textArea: HTMLTextAreaElement): void {
@@ -51,6 +52,11 @@ export class AutosizeDirective implements AfterContentChecked {
     }
     adjust(): void {
         if (this.textAreaEl) {
+            if (this.textAreaEl.value === this.oldContent) {
+              return;
+            }
+            this.oldContent = this.textAreaEl.value;
+            
             const clone = this.textAreaEl.cloneNode(true);
             const parent = this.textAreaEl.parentNode;
             clone.style.visibility = 'hidden';
