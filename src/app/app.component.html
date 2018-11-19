@@ -1,0 +1,21 @@
+<div>
+    <textarea [(ngModel)]="longText" autosize></textarea>
+</div>
+
+<hr/>
+
+<div>
+    <h3>Min rows <input [(ngModel)]="minRows"/></h3>
+    <textarea autosize [minRows]="minRows">Less than 3 rows of text but it should keep size </textarea>
+</div>
+
+<hr/>
+
+<div>
+    <h3>Max rows <input [(ngModel)]="maxRows"/></h3>
+    <textarea autosize [maxRows]="maxRows">Here if text gets above 4 rows autosize should go off (show scroll)
+new line
+newer line
+newerer :D line</textarea>
+</div>
+
