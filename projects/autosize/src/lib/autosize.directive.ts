@@ -1,30 +1,69 @@
-import {ElementRef, HostListener, Directive, Input, AfterContentChecked} from '@angular/core';
+import {
+    ElementRef,
+    HostListener,
+    Directive,
+    Input,
+    NgZone, OnDestroy, OnChanges
+} from '@angular/core';
+import {fromEvent, ReplaySubject} from 'rxjs';
+
+import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 
 const MAX_LOOKUP_RETRIES = 3;
+
 @Directive({
     selector: '[autosize]'
 })
 
-export class AutosizeDirective implements AfterContentChecked {
+export class AutosizeDirective implements OnDestroy, OnChanges {
     @Input() minRows: number;
     @Input() maxRows: number;
+    @Input('ngModel') text: any;
 
     private retries = 0;
     private textAreaEl: any;
+
+    private _oldContent: string;
+    private _oldWidth: number;
+
+    private _destroyed$ = new ReplaySubject(1);
 
     @HostListener('input', ['$event.target'])
     onInput(textArea: HTMLTextAreaElement): void {
         this.adjust();
     }
-    constructor(public element: ElementRef) {
+
+    constructor(
+        public element: ElementRef,
+        private _zone: NgZone
+    ) {
         if (this.element.nativeElement.tagName !== 'TEXTAREA') {
             this._findNestedTextArea();
 
         } else {
             this.textAreaEl = this.element.nativeElement;
             this.textAreaEl.style.overflow = 'hidden';
+            this._onTextAreaFound();
         }
     }
+
+    ngOnDestroy() {
+        this._destroyed$.next(true);
+        this._destroyed$.complete();
+    }
+
+    ngOnChanges(changes) {
+        if (this.textAreaEl && changes.text && this.text !== this.textAreaEl.value) {
+            setTimeout(() => {
+                this.ngOnChanges(changes);
+            }, 50);
+
+            return;
+        }
+
+        this.adjust(true);
+    }
+
     _findNestedTextArea() {
         this.textAreaEl = this.element.nativeElement.querySelector('TEXTAREA');
 
@@ -44,13 +83,45 @@ export class AutosizeDirective implements AfterContentChecked {
             }
             return;
         }
+
         this.textAreaEl.style.overflow = 'hidden';
+        this._onTextAreaFound();
+
     }
-    ngAfterContentChecked(): void {
+
+    _onTextAreaFound() {
+        this._zone.runOutsideAngular(() => {
+            fromEvent(window, 'resize')
+                .pipe(
+                    takeUntil(this._destroyed$),
+                    debounceTime(200),
+                    distinctUntilChanged()
+                )
+                .subscribe(() => {
+                        this._zone.run(() => {
+                            this.adjust();
+                        });
+                    }
+                );
+        });
         this.adjust();
     }
-    adjust(): void {
+
+    adjust(inputsChanged = false): void {
         if (this.textAreaEl) {
+            if (
+                inputsChanged === false &&
+                this.text === this._oldContent &&
+                this.textAreaEl.offsetWidth === this._oldWidth
+            ) {
+                return;
+            }
+
+            console.log('adjusting');
+
+            this._oldContent = this.text;
+            this._oldWidth = this.textAreaEl.offsetWidth;
+
             const clone = this.textAreaEl.cloneNode(true);
             const parent = this.textAreaEl.parentNode;
             clone.style.visibility = 'hidden';
