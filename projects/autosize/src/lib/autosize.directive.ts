@@ -109,9 +109,12 @@ export class AutosizeDirective implements OnDestroy, OnChanges {
 
     adjust(inputsChanged = false): void {
         if (this.textAreaEl) {
+
+            const currentText = this.text || this.textAreaEl.value;
+
             if (
                 inputsChanged === false &&
-                this.text === this._oldContent &&
+                currentText === this._oldContent &&
                 this.textAreaEl.offsetWidth === this._oldWidth
             ) {
                 return;
@@ -119,7 +122,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges {
 
             console.log('adjusting');
 
-            this._oldContent = this.text;
+            this._oldContent = currentText;
             this._oldWidth = this.textAreaEl.offsetWidth;
 
             const clone = this.textAreaEl.cloneNode(true);
