@@ -46,6 +46,15 @@ Use directly inside your HTML templates
 </ion-textarea>
 ```
 
+#### Reactive forms
+In order to use our sweet directive with FormGroup we need to feed our directive with it:
+```
+<form [formGroup]="reactiveForm">
+    <textarea type="text" formControlName="reactiveText" autosize
+        [formGroup]="reactiveForm"></textarea>
+</form>
+```
+
 ## Settings
 ##### [minRows] 
 Sets minimal amount of rows of the textarea

@@ -2,9 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
-// import {AutosizeModule} from 'ngx-autosize';
-import {AutosizeModule} from '../../projects/autosize/src/lib/autosize.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AutosizeModule} from 'ngx-autosize';
+// import {AutosizeModule} from '../../projects/autosize/src/lib/autosize.module';
 
 @NgModule({
     declarations: [
@@ -13,6 +13,7 @@ import {AutosizeModule} from '../../projects/autosize/src/lib/autosize.module';
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         AutosizeModule
     ],
     providers: [],

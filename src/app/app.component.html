@@ -19,3 +19,30 @@ newer line
 newerer :D line</textarea>
 </div>
 
+<hr/>
+
+<div>
+    <h3>[ formControl ]
+        <button (click)="updateReactiveText()">Change</button>
+    </h3>
+    <textarea type="text" [formControl]="reactiveText" autosize></textarea>
+</div>
+
+<div>
+    <h3>[ formGroup ]</h3>
+    Text area needs formGroup reference ;(
+    <br/>
+    <p>Html:</p>
+    <textarea disabled="disabled" autosize>&lt;form [formGroup]=&quot;reactiveForm&quot;&gt;
+    &lt;textarea type=&quot;text&quot; formControlName=&quot;reactiveText&quot;
+            [formGroup]=&quot;reactiveForm&quot; autosize&gt;&lt;/textarea&gt;
+&lt;/form&gt;</textarea>
+    <br/>
+    <p>And result: <button (click)="updateReactiveFormText()">Change</button></p>
+    <form [formGroup]="reactiveForm">
+        <textarea type="text" formControlName="reactiveText" [formGroup]="reactiveForm" autosize></textarea>
+    </form>
+</div>
+
+<hr/>
+
