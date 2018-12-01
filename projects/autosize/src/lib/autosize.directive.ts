@@ -3,12 +3,11 @@ import {
     HostListener,
     Directive,
     Input,
-    NgZone, OnDestroy, OnChanges
+    NgZone, OnDestroy, OnChanges, AfterContentChecked
 } from '@angular/core';
 import {fromEvent, ReplaySubject} from 'rxjs';
 
 import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
-import {FormControl, FormGroup} from "@angular/forms";
 
 const MAX_LOOKUP_RETRIES = 3;
 
@@ -16,13 +15,9 @@ const MAX_LOOKUP_RETRIES = 3;
     selector: '[autosize]'
 })
 
-export class AutosizeDirective implements OnDestroy, OnChanges {
+export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChecked {
     @Input() minRows: number;
     @Input() maxRows: number;
-    @Input('ngModel') ngModelText: any;
-    @Input() formControl: FormControl;
-    @Input() formControlName: string;
-    @Input() formGroup: FormGroup;
 
     private retries = 0;
     private textAreaEl: any;
@@ -51,42 +46,16 @@ export class AutosizeDirective implements OnDestroy, OnChanges {
         }
     }
 
-    ngOnInit() {
-        let fc;
-        if (this.formControl) {
-            fc = this.formControl;
-
-        } else if (this.formControlName) {
-            if (!this.formGroup) {
-                console.warn('missing formGroup reference');
-                return;
-            }
-            fc = this.formGroup.controls[this.formControlName];
-        }
-
-        if (fc) {
-            fc.valueChanges
-                .pipe(takeUntil(this._destroyed$))
-                .subscribe(() => {
-                    this.adjust();
-                })
-        }
-    }
-
     ngOnDestroy() {
         this._destroyed$.next(true);
         this._destroyed$.complete();
     }
 
+    ngAfterContentChecked() {
+        this.adjust();
+    }
+
     ngOnChanges(changes) {
-        if (this.textAreaEl && changes.ngModelText && this.ngModelText !== this.textAreaEl.value) {
-            setTimeout(() => {
-                this.ngOnChanges(changes);
-            }, 50);
-
-            return;
-        }
-
         this.adjust(true);
     }
 
@@ -138,7 +107,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges {
     adjust(inputsChanged = false): void {
         if (this.textAreaEl) {
 
-            const currentText = this.ngModelText || this.textAreaEl.value;
+            const currentText = this.textAreaEl.value;
 
             if (
                 inputsChanged === false &&

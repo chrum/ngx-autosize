@@ -21,6 +21,9 @@ export class AppComponent {
         reactiveText: new FormControl(longText)
     });
 
+    changeNgModel() {
+        this.longText += "\n next";
+    }
 
     updateReactiveText() {
         const current = this.reactiveText.value;
