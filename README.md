@@ -46,6 +46,7 @@ Use directly inside your HTML templates
 </ion-textarea>
 ```
 
+
 ## Settings
 ##### [minRows] 
 Sets minimal amount of rows of the textarea
