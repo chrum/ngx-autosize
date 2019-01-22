@@ -89,7 +89,7 @@ export class AutosizeDirective implements AfterContentChecked {
 
         if (isNaN(lineHeight)) {
             const fontSize = window.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
-            lineHeight = Math.floor(parseInt(fontSize.replace('px', ''), 10) * 1.2);
+            lineHeight = Math.floor(parseInt(fontSize.replace('px', ''), 10) * 1.5);
         }
 
         return lineHeight;
