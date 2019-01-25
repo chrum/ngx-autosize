@@ -117,8 +117,6 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                 return;
             }
 
-            console.log('adjusting');
-
             this._oldContent = currentText;
             this._oldWidth = this.textAreaEl.offsetWidth;
 
@@ -134,11 +132,9 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             let height = clone.scrollHeight;
             const rowsCount = height / lineHeight;
             if (this.minRows && this.minRows >= rowsCount) {
-                // clone.style.overflow = 'auto';
                 height = this.minRows * lineHeight;
 
             } else if (this.maxRows && this.maxRows <= rowsCount) {
-                // clone.style.overflow = 'auto';
                 height = this.maxRows * lineHeight;
                 this.textAreaEl.style.overflow = 'auto';
 
