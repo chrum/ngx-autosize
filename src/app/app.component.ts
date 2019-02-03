@@ -15,6 +15,7 @@ export class AppComponent {
     public longText = longText;
     public minRows = 3;
     public maxRows = 4;
+    public onlyGrow = true;
 
     reactiveText = new FormControl(longText);
     reactiveForm = new FormGroup({

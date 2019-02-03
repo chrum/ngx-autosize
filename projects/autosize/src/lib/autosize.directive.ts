@@ -18,6 +18,7 @@ const MAX_LOOKUP_RETRIES = 3;
 export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChecked {
     @Input() minRows: number;
     @Input() maxRows: number;
+    @Input() onlyGrow: boolean = false;
 
     private retries = 0;
     private textAreaEl: any;
@@ -128,21 +129,26 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             clone.style.overflow = 'auto';
             clone.style.height = 'auto';
 
-            const lineHeight = this._getLineHeight();
             let height = clone.scrollHeight;
-            const rowsCount = height / lineHeight;
-            if (this.minRows && this.minRows >= rowsCount) {
-                height = this.minRows * lineHeight;
+            const willGrow = height > this.textAreaEl.offsetHeight;
 
-            } else if (this.maxRows && this.maxRows <= rowsCount) {
-                height = this.maxRows * lineHeight;
-                this.textAreaEl.style.overflow = 'auto';
+            if (this.onlyGrow === false || willGrow) {
+                const lineHeight = this._getLineHeight();
+                const rowsCount = height / lineHeight;
+                if (this.minRows && this.minRows >= rowsCount) {
+                    height = this.minRows * lineHeight;
 
-            } else {
-                this.textAreaEl.style.overflow = 'hidden';
+                } else if (this.maxRows && this.maxRows <= rowsCount) {
+                    height = this.maxRows * lineHeight;
+                    this.textAreaEl.style.overflow = 'auto';
+
+                } else {
+                    this.textAreaEl.style.overflow = 'hidden';
+                }
+
+                this.textAreaEl.style.height = height + 'px';
             }
 
-            this.textAreaEl.style.height = height + 'px';
             parent.removeChild(clone);
         }
     }
