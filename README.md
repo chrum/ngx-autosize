@@ -45,18 +45,20 @@ Use directly inside your HTML templates
     And this is Ionic2 example
 </ion-textarea>
 ```
-
-
 ## Settings
-##### [minRows] 
-Sets minimal amount of rows of the textarea
-##### [maxRows]
-Sets maximum rows count after which autosizing if turned off and scrollbar appears
+Name  | Default | Type | Description
+--- | --- | --- | ---
+minRows | | integer | Sets minimal amount of rows of the textarea
+maxRows | | integer | Sets maximum rows count after which autosizing if turned off and scrollbar appears
+onlyGrow | false | boolean | Controls if autosize should make the textarea smaller. In other words... should empty lines be trimmed?
+
+Example
 ```
 <textarea autosize [minRows]="5" [maxRows]="10">
     Hello, this is an example of Autosize in Angular2.
 </textarea>
 ```
+
 
 ## Origins
 This small lib is based on great

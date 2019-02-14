@@ -25,6 +25,20 @@ newerer :D line</textarea>
 <hr/>
 
 <div>
+    <h3>Only growing <input type="checkbox" [(ngModel)]="onlyGrow"/></h3>
+    <textarea autosize [onlyGrow]="onlyGrow">1. Try resizing this
+    2. by dragging or
+    3. type lots of text and then
+    4. start deleting it...
+    5. this textarea
+    6.    should keep its max size
+    7.    and
+    8. not shrink</textarea>
+</div>
+
+<hr/>
+
+<div>
     <h3>[ formControl ]
         <button (click)="updateReactiveText()">Change</button>
     </h3>
