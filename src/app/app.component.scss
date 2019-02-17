@@ -1,3 +1,7 @@
 textarea {
   min-width: 450px;
+
+  &.forceImportant {
+    height: auto !important
+  }
 }

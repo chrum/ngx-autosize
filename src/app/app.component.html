@@ -39,6 +39,22 @@ newerer :D line</textarea>
 <hr/>
 
 <div>
+    <h3>
+        <h3>Use '!important' <input type="checkbox" [(ngModel)]="useImportant"/></h3>
+    </h3>
+    <form [formGroup]="reactiveForm">
+        <textarea type="text" class="forceImportant"
+                  [useImportant]="useImportant"
+                  autosize>This one shouldnt work correctly without 'useImportant' Input set
+        as there is a
+        harmful
+        and malicious '!important' somewhere in the styles</textarea>
+    </form>
+</div>
+
+<hr/>
+
+<div>
     <h3>[ formControl ]
         <button (click)="updateReactiveText()">Change</button>
     </h3>
