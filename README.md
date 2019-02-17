@@ -51,6 +51,7 @@ Name  | Default | Type | Description
 minRows | | integer | Sets minimal amount of rows of the textarea
 maxRows | | integer | Sets maximum rows count after which autosizing if turned off and scrollbar appears
 onlyGrow | false | boolean | Controls if autosize should make the textarea smaller. In other words... should empty lines be trimmed?
+useImportant | false | boolean | Controls if autosize should include `!important` in its height css styles. Should only need to be used if the height of the textarea is being overridden elsewhere
 
 Example
 ```

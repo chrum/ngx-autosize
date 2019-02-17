@@ -18,7 +18,8 @@ const MAX_LOOKUP_RETRIES = 3;
 export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChecked {
     @Input() minRows: number;
     @Input() maxRows: number;
-    @Input() onlyGrow: boolean = false;
+    @Input() onlyGrow = false;
+    @Input() useImportant = false;
 
     private retries = 0;
     private textAreaEl: any;
@@ -102,7 +103,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
         });
         setTimeout(() => {
             this.adjust();
-        })
+        });
     }
 
     adjust(inputsChanged = false): void {
@@ -135,18 +136,25 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             if (this.onlyGrow === false || willGrow) {
                 const lineHeight = this._getLineHeight();
                 const rowsCount = height / lineHeight;
+
+                let styleAttribute = '';
+
                 if (this.minRows && this.minRows >= rowsCount) {
                     height = this.minRows * lineHeight;
 
                 } else if (this.maxRows && this.maxRows <= rowsCount) {
                     height = this.maxRows * lineHeight;
-                    this.textAreaEl.style.overflow = 'auto';
+                    styleAttribute += 'overflow: auto;';
 
                 } else {
-                    this.textAreaEl.style.overflow = 'hidden';
+                    styleAttribute += 'overflow: hidden;';
                 }
 
-                this.textAreaEl.style.height = height + 'px';
+                styleAttribute += `height: ${height}px`;
+
+                styleAttribute += this.useImportant ? '!important;' : ';';
+
+                this.textAreaEl.setAttribute('style', styleAttribute);
             }
 
             parent.removeChild(clone);
