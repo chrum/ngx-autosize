@@ -95,11 +95,10 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                     distinctUntilChanged()
                 )
                 .subscribe(() => {
-                        this._zone.run(() => {
-                            this.adjust();
-                        });
-                    }
-                );
+                    this._zone.run(() => {
+                        this.adjust();
+                    });
+                });
         });
         setTimeout(() => {
             this.adjust();
