@@ -132,9 +132,10 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             let height = clone.scrollHeight;
 
             // add into height top and bottom borders' width
-            let computedStyle = window.getComputedStyle(clone, null);           
-            height += parseInt(computedStyle.getPropertyValue('border-top-width')) + parseInt(computedStyle.getPropertyValue('border-bottom-width'));
-            
+            let computedStyle = window.getComputedStyle(clone, null);
+            height += parseInt(computedStyle.getPropertyValue('border-top-width'));
+            height += parseInt(computedStyle.getPropertyValue('border-bottom-width'));
+
             const willGrow = height > this.textAreaEl.offsetHeight;
 
             if (this.onlyGrow === false || willGrow) {

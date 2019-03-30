@@ -4,4 +4,9 @@ textarea {
   &.forceImportant {
     height: auto !important
   }
+
+  &.top-and-bottom-borders {
+    border-top-width:15px;
+    border-bottom-width:15px
+  }
 }
