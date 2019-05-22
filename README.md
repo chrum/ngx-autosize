@@ -19,8 +19,8 @@ npm install ngx-autosize
 
 ## Use Example:
 
-Add the declaration to your @NgModule:
-
+Add the declaration to your @NgModule:  
+**IMPORTANT !!!** you need to do it for every module that will be autosizing textareas ;)
 ```typescript
 import {AutosizeModule} from 'ngx-autosize';
 
@@ -32,6 +32,8 @@ import {AutosizeModule} from 'ngx-autosize';
   ]
 })
 ```
+
+
 
 Use directly inside your HTML templates
 
