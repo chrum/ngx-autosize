@@ -90,9 +90,9 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
         this._zone.runOutsideAngular(() => {
             fromEvent(window, 'resize')
                 .pipe(
-                    takeUntil(this._destroyed$),
                     debounceTime(200),
-                    distinctUntilChanged()
+                    distinctUntilChanged(),
+                    takeUntil(this._destroyed$)
                 )
                 .subscribe(() => {
                     this._zone.run(() => {
@@ -124,6 +124,9 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             const clone = this.textAreaEl.cloneNode(true);
             const parent = this.textAreaEl.parentNode;
             clone.style.visibility = 'hidden';
+            clone.style.position = 'absolute';
+            clone.textContent = currentText;
+
             parent.appendChild(clone);
 
             clone.style.overflow = 'auto';
