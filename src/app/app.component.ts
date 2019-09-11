@@ -5,6 +5,13 @@ const longText = `Mega Man X, known in Japan as Rockman X,[a] is an action-platf
         1
         2
         3`;
+const resetExplanation = `In this text area we want to test if text after some manual changes can be restored to its original value and if textarea keeps autosizing...
+
+so just change this text, add some lines... 
+and in the end hit the 'RESET' button above.
+
+Text area should come back to its original form :)
+`;
 
 @Component({
     selector: 'app-root',
@@ -13,6 +20,7 @@ const longText = `Mega Man X, known in Japan as Rockman X,[a] is an action-platf
 })
 export class AppComponent {
     public longText = longText;
+    public resetableContent = resetExplanation;
     public minRows = 3;
     public maxRows = 4;
     public onlyGrow = true;
@@ -37,5 +45,9 @@ export class AppComponent {
         this.reactiveForm.setValue({
             reactiveText: current + "\n next"
         });
+    }
+
+    resetArbitraryExample() {
+        this.resetableContent = resetExplanation;
     }
 }
