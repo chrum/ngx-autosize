@@ -1,6 +1,6 @@
 {
   "name": "ngx-autosize-app",
-  "version": "1.6.4",
+  "version": "1.7.0-next",
   "homepage": "https://chrum.it/pages/ngx-autosize",
   "description": "Directive that automatically adjusts textarea height to fit content",
   "repository": {
@@ -71,6 +71,7 @@
     "ng-packagr": "^5.2.0",
     "protractor": "^5.4.2",
     "ts-node": "~7.0.0",
+    "tsickle": "^0.36.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
   }

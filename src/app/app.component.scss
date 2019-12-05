@@ -2,6 +2,12 @@ table {
   margin: 0 auto;
 }
 
+.resize-with-window {
+  textarea {
+    width: 80%;
+  }
+}
+
 textarea {
   min-width: 450px;
 

@@ -5,9 +5,6 @@ import {
     Input,
     NgZone, OnDestroy, OnChanges, AfterContentChecked
 } from '@angular/core';
-import {fromEvent, ReplaySubject} from 'rxjs';
-
-import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 
 const MAX_LOOKUP_RETRIES = 3;
 
@@ -35,7 +32,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     private _oldContent: string;
     private _oldWidth: number;
 
-    private _destroyed$ = new ReplaySubject(1);
+    private _windowResizeHandler;
 
     @HostListener('input', ['$event.target'])
     onInput(textArea: HTMLTextAreaElement): void {
@@ -57,8 +54,9 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     }
 
     ngOnDestroy() {
-        this._destroyed$.next(true);
-        this._destroyed$.complete();
+        if (this._windowResizeHandler) {
+            window.removeEventListener('resize', this._windowResizeHandler, false);
+        }
     }
 
     ngAfterContentChecked() {
@@ -95,21 +93,21 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     }
 
     _onTextAreaFound() {
-        this._zone.runOutsideAngular(() => {
-            fromEvent(window, 'resize')
-                .pipe(
-                    debounceTime(200),
-                    distinctUntilChanged(),
-                    takeUntil(this._destroyed$)
-                )
-                .subscribe(() => {
-                    this._zone.run(() => {
-                        this.adjust();
-                    });
-                });
-        });
+        this._addWindowResizeHandler();
         setTimeout(() => {
             this.adjust();
+        });
+    }
+
+    _addWindowResizeHandler() {
+        this._windowResizeHandler = Debounce(() => {
+            this._zone.run(() => {
+                this.adjust();
+            });
+        }, 200);
+
+        this._zone.runOutsideAngular(() => {
+            window.addEventListener('resize', this._windowResizeHandler, false);
         });
     }
 
@@ -192,4 +190,24 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
         return lineHeight;
     }
+}
+
+function Debounce(func, wait, immediate = false) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        const later = function () {
+            timeout = null;
+            if (!immediate) {
+                func.apply(context, args);
+            }
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) {
+            func.apply(context, args);
+        }
+    };
 }
