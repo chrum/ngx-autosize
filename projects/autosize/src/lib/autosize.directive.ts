@@ -16,7 +16,15 @@ const MAX_LOOKUP_RETRIES = 3;
 })
 
 export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChecked {
-    @Input() minRows: number;
+    @Input()
+    set minRows(value) {
+        this._minRows = value;
+        if (this.textAreaEl) {
+            this.textAreaEl.rows = value;
+        }
+    };
+    private _minRows: number;
+
     @Input() maxRows: number;
     @Input() onlyGrow = false;
     @Input() useImportant = false;
@@ -148,8 +156,8 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
                 let styleAttribute = '';
 
-                if (this.minRows && this.minRows >= rowsCount) {
-                    height = this.minRows * lineHeight;
+                if (this._minRows && this._minRows >= rowsCount) {
+                    height = this._minRows * lineHeight;
 
                 } else if (this.maxRows && this.maxRows <= rowsCount) {
                     height = this.maxRows * lineHeight;
