@@ -33,6 +33,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     private _oldWidth: number;
 
     private _windowResizeHandler;
+    private _destroyed = false;
 
     @HostListener('input', ['$event.target'])
     onInput(textArea: HTMLTextAreaElement): void {
@@ -54,6 +55,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     }
 
     ngOnDestroy() {
+        this._destroyed = true;
         if (this._windowResizeHandler) {
             window.removeEventListener('resize', this._windowResizeHandler, false);
         }
@@ -112,7 +114,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     }
 
     adjust(inputsChanged = false): void {
-        if (this.textAreaEl) {
+        if (!this._destroyed && this.textAreaEl) {
 
             const currentText = this.textAreaEl.value;
 
