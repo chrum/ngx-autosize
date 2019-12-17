@@ -120,5 +120,17 @@ is causing our cloned helper element some problems so...</textarea>
 
 <hr/>
 
+<div style="text-align: center">
+    <h3>Destroyed ng-container </h3>
+    <div style="max-width: 500px; margin: auto; border: 1px solid black">
+        <p >No autosizing textarea here... that is because textarea was placed in ng-container that was immediately destroyed.</p>
+        <p>Eventough autosize was still initializing itself when container was destroyed... there should be no error in the console</p>
+    </div>
+    <ng-container *ngIf="showAreaInContainer">
+        <textarea [(ngModel)]="longText" autosize></textarea>
+    </ng-container>
+</div>
+
+<hr/>
 
 
