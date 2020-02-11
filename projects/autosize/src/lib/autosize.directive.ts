@@ -154,24 +154,21 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                 const lineHeight = this._getLineHeight();
                 const rowsCount = height / lineHeight;
 
-                let styleAttribute = '';
-
                 if (this._minRows && this._minRows >= rowsCount) {
                     height = this._minRows * lineHeight;
 
                 } else if (this.maxRows && this.maxRows <= rowsCount) {
                     height = this.maxRows * lineHeight;
-                    styleAttribute += 'overflow: auto;';
+                    this.textAreaEl.style.overflow = 'auto';
 
                 } else {
-                    styleAttribute += 'overflow: hidden;';
+                    this.textAreaEl.style.overflow = 'hidden';
                 }
 
-                styleAttribute += `height: ${height}px`;
+                let heightStyle = height + 'px';
+                heightStyle += this.useImportant ? ' !important' : '';
 
-                styleAttribute += this.useImportant ? '!important;' : ';';
-
-                this.textAreaEl.setAttribute('style', styleAttribute);
+                this.textAreaEl.style.height = heightStyle;
             }
 
             parent.removeChild(clone);
