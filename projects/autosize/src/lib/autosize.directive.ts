@@ -148,7 +148,8 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             height += parseInt(computedStyle.getPropertyValue('border-top-width'));
             height += parseInt(computedStyle.getPropertyValue('border-bottom-width'));
 
-            const willGrow = height > this.textAreaEl.offsetHeight;
+            const oldHeight = this.textAreaEl.offsetHeight;
+            const willGrow = height > oldHeight;
 
             if (this.onlyGrow === false || willGrow) {
                 const lineHeight = this._getLineHeight();
@@ -158,7 +159,9 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                     height = this._minRows * lineHeight;
 
                 } else if (this.maxRows && this.maxRows <= rowsCount) {
-                    height = this.maxRows * lineHeight;
+                    // never shrink the textarea if onlyGrow is true
+                    const maxHeight = this.maxRows * lineHeight;
+                    height = this.onlyGrow ? Math.max(maxHeight, oldHeight): maxHeight;
                     this.textAreaEl.style.overflow = 'auto';
 
                 } else {
