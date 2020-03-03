@@ -131,6 +131,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
             const clone = this.textAreaEl.cloneNode(true);
             const parent = this.textAreaEl.parentNode;
+            clone.rows = 1;
             clone.style.width = this.textAreaEl.offsetWidth + 'px';
             clone.style.visibility = 'hidden';
             clone.style.position = 'absolute';
