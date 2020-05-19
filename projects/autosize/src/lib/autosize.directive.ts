@@ -3,7 +3,7 @@ import {
     HostListener,
     Directive,
     Input,
-    NgZone, OnDestroy, OnChanges, AfterContentChecked
+    NgZone, OnDestroy, OnChanges, AfterContentChecked, Output, EventEmitter
 } from '@angular/core';
 
 const MAX_LOOKUP_RETRIES = 3;
@@ -25,6 +25,8 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     @Input() maxRows: number;
     @Input() onlyGrow = false;
     @Input() useImportant = false;
+
+    @Output() resized = new EventEmitter<number>();
 
     private retries = 0;
     private textAreaEl: any;
@@ -172,6 +174,8 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                 const important = this.useImportant ? 'important' : '';
 
                 this.textAreaEl.style.setProperty('height', heightStyle, important);
+
+                this.resized.emit(height);
             }
 
             parent.removeChild(clone);

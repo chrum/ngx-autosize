@@ -61,7 +61,17 @@ Example
     Hello, this is an example of Autosize in Angular2.
 </textarea>
 ```
+## Events / Outputs
+Name  | Description
+--- | ---
+resized | Called whenever textarea has changes its size. New height as a param.
 
+Example
+```
+<textarea autosize (resized)="onResized($event)">
+    You need to implement 'onResized' yourself
+</textarea>
+```
 
 ## Origins
 This small lib is based on great
