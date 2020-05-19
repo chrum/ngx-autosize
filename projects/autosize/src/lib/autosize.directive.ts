@@ -168,10 +168,10 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                     this.textAreaEl.style.overflow = 'hidden';
                 }
 
-                let heightStyle = height + 'px';
-                heightStyle += this.useImportant ? ' !important' : '';
+                const heightStyle = height + 'px';
+                const important = this.useImportant ? 'important' : '';
 
-                this.textAreaEl.style.height = heightStyle;
+                this.textAreaEl.style.setProperty('height', heightStyle, important);
             }
 
             parent.removeChild(clone);
