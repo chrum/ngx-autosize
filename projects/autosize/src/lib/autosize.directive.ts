@@ -138,7 +138,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
             parent.appendChild(clone);
 
-            clone.style.overflow = 'auto';
+            clone.style.overflow = 'hidden';
             clone.style.height = 'auto';
 
             let height = clone.scrollHeight;
