@@ -2,14 +2,16 @@
     <h3>Regular textarea
         <button (click)="changeNgModel()">Change</button>
     </h3>
-    <textarea [(ngModel)]="longText" autosize></textarea>
+    <textarea [(ngModel)]="longText"
+              (resized)="onResized($event)"
+              autosize></textarea>
 </div>
 
 <hr/>
 
 <div>
     <h3>Min rows <input [(ngModel)]="minRows"/></h3>
-    <textarea autosize [minRows]="minRows">Less than 3 rows of text but it should keep size </textarea>
+    <textarea autosize rows="1" [minRows]="minRows">1 row of text but it should keep size </textarea>
 </div>
 
 <hr/>

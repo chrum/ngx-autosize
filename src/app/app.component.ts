@@ -22,7 +22,7 @@ Text area should come back to its original form :)
 export class AppComponent implements OnInit {
     public longText = longText;
     public resetableContent = resetExplanation;
-    public minRows = 3;
+    public minRows = 1;
     public maxRows = 4;
     public onlyGrow = true;
     public useImportant = true;
@@ -56,5 +56,9 @@ export class AppComponent implements OnInit {
 
     resetArbitraryExample() {
         this.resetableContent = resetExplanation;
+    }
+
+    onResized(newHeight) {
+        console.log(newHeight);
     }
 }
