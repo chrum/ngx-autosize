@@ -5,6 +5,7 @@ import {
     Input,
     NgZone, OnDestroy, OnChanges, AfterContentChecked, Output, EventEmitter
 } from '@angular/core';
+import {WindowRef} from './window-ref.service';
 
 const MAX_LOOKUP_RETRIES = 3;
 
@@ -44,6 +45,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
     constructor(
         public element: ElementRef,
+        private _window: WindowRef,
         private _zone: NgZone
     ) {
         if (this.element.nativeElement.tagName !== 'TEXTAREA') {
@@ -59,7 +61,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     ngOnDestroy() {
         this._destroyed = true;
         if (this._windowResizeHandler) {
-            window.removeEventListener('resize', this._windowResizeHandler, false);
+            this._window.nativeWindow.removeEventListener('resize', this._windowResizeHandler, false);
         }
     }
 
@@ -111,12 +113,12 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
         }, 200);
 
         this._zone.runOutsideAngular(() => {
-            window.addEventListener('resize', this._windowResizeHandler, false);
+            this._window.nativeWindow.addEventListener('resize', this._windowResizeHandler, false);
         });
     }
 
     adjust(inputsChanged = false): void {
-        if (!this._destroyed && this.textAreaEl) {
+        if (!this._destroyed && this.textAreaEl && this.textAreaEl.parentNode) {
 
             const currentText = this.textAreaEl.value;
 
@@ -146,7 +148,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             let height = clone.scrollHeight;
 
             // add into height top and bottom borders' width
-            let computedStyle = window.getComputedStyle(clone, null);
+            let computedStyle = this._window.nativeWindow.getComputedStyle(clone, null);
             height += parseInt(computedStyle.getPropertyValue('border-top-width'));
             height += parseInt(computedStyle.getPropertyValue('border-bottom-width'));
 
@@ -184,13 +186,13 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
     private _getLineHeight() {
         let lineHeight = parseInt(this.textAreaEl.style.lineHeight, 10);
-        if (isNaN(lineHeight) && window.getComputedStyle) {
-            const styles = window.getComputedStyle(this.textAreaEl);
+        if (isNaN(lineHeight) && this._window.nativeWindow.getComputedStyle) {
+            const styles = this._window.nativeWindow.getComputedStyle(this.textAreaEl);
             lineHeight = parseInt(styles.lineHeight, 10);
         }
 
         if (isNaN(lineHeight)) {
-            const fontSize = window.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
+            const fontSize = this._window.nativeWindow.getComputedStyle(this.textAreaEl, null).getPropertyValue('font-size');
             lineHeight = Math.floor(parseInt(fontSize.replace('px', ''), 10) * 1.5);
         }
 

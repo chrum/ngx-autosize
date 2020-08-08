@@ -1,10 +1,14 @@
-import { NgModule } from '@angular/core';
-import { AutosizeDirective } from './autosize.directive';
+import {NgModule} from '@angular/core';
+import {AutosizeDirective} from './autosize.directive';
+import {WindowRef} from './window-ref.service';
 
 @NgModule({
-  declarations: [AutosizeDirective],
-  imports: [
-  ],
-  exports: [AutosizeDirective]
+    declarations: [AutosizeDirective],
+    imports: [],
+    providers: [
+        WindowRef
+    ],
+    exports: [AutosizeDirective]
 })
-export class AutosizeModule { }
+export class AutosizeModule {
+}
