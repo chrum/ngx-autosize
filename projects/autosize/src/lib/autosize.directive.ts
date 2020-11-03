@@ -152,6 +152,11 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             height += parseInt(computedStyle.getPropertyValue('border-top-width'));
             height += parseInt(computedStyle.getPropertyValue('border-bottom-width'));
 
+            // add into height top and bottom paddings width
+            height += parseInt(computedStyle.getPropertyValue('padding-top'));
+            height += parseInt(computedStyle.getPropertyValue('padding-bottom'));
+
+
             const oldHeight = this.textAreaEl.offsetHeight;
             const willGrow = height > oldHeight;
 

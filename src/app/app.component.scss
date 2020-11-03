@@ -19,4 +19,9 @@ textarea {
     border-top-width:15px;
     border-bottom-width:15px
   }
+
+  &.top-and-bottom-padding {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }
