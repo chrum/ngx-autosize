@@ -53,7 +53,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
         } else {
             this.textAreaEl = this.element.nativeElement;
-            this.textAreaEl.style.overflow = 'hidden';
+            this.textAreaEl.style['overflow-y'] = 'hidden';
             this._onTextAreaFound();
         }
     }
@@ -93,7 +93,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             return;
         }
 
-        this.textAreaEl.style.overflow = 'hidden';
+        this.textAreaEl.style['overflow-y'] = 'hidden';
         this._onTextAreaFound();
 
     }
@@ -142,7 +142,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
 
             parent.appendChild(clone);
 
-            clone.style.overflow = 'hidden';
+            clone.style['overflow-y'] = 'hidden';
             clone.style.height = 'auto';
 
             let height = clone.scrollHeight;
@@ -171,10 +171,10 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
                     // never shrink the textarea if onlyGrow is true
                     const maxHeight = this.maxRows * lineHeight;
                     height = this.onlyGrow ? Math.max(maxHeight, oldHeight): maxHeight;
-                    this.textAreaEl.style.overflow = 'auto';
+                    this.textAreaEl.style['overflow-y'] = 'auto';
 
                 } else {
-                    this.textAreaEl.style.overflow = 'hidden';
+                    this.textAreaEl.style['overflow-y'] = 'hidden';
                 }
 
                 const heightStyle = height + 'px';
