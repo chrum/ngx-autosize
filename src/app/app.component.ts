@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     public maxRows = 4;
     public onlyGrow = true;
     public useImportant = true;
+    public dynamic: 'enabled' | 'disabled' = 'enabled';
 
     public showAreaInContainer = true;
 

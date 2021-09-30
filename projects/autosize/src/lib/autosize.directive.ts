@@ -21,15 +21,21 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
             this.textAreaEl.rows = value;
         }
     };
+    @Input('autosize')
+    set _autosize(autosize: boolean) {
+        this.autosize = typeof autosize === 'boolean'
+            ? autosize
+            : true;
+    };
     private _minRows: number;
 
-    @Input() autosize = true;
     @Input() maxRows: number;
     @Input() onlyGrow = false;
     @Input() useImportant = false;
 
     @Output() resized = new EventEmitter<number>();
 
+    private autosize = true;
     private retries = 0;
     private textAreaEl: any;
 
