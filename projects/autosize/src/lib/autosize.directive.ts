@@ -23,6 +23,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     };
     private _minRows: number;
 
+    @Input() autosize = true;
     @Input() maxRows: number;
     @Input() onlyGrow = false;
     @Input() useImportant = false;
@@ -118,7 +119,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
     }
 
     adjust(inputsChanged = false): void {
-        if (!this._destroyed && this.textAreaEl && this.textAreaEl.parentNode) {
+        if (this.autosize && !this._destroyed && this.textAreaEl && this.textAreaEl.parentNode) {
 
             const currentText = this.textAreaEl.value;
 

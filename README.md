@@ -47,6 +47,11 @@ Use directly inside your HTML templates
     And this is Ionic2 example
 </ion-textarea>
 ```
+## Dynamically enable directive
+```
+<textarea [autosize]="true"></textarea> // Enabled (defalut)
+<textarea [autosize]="false"></textarea> // Disabled
+```
 ## Settings
 Name  | Default | Type | Description
 --- | --- | --- | ---

@@ -10,6 +10,20 @@
 <hr/>
 
 <div>
+    <h3>Dynamic directive - enabled</h3>
+    <textarea [ngModel]="longText"
+              (resized)="onResized($event)"
+              [autosize]="true"></textarea>
+</div>
+
+<div>
+    <h3>Dynamic directive - disabled</h3>
+    <textarea [ngModel]="longText"
+              (resized)="onResized($event)"
+              [autosize]="false"></textarea>
+</div>
+
+<div>
     <h3>Min rows <input [(ngModel)]="minRows"/></h3>
     <textarea autosize rows="1" [minRows]="minRows">1 row of text but it should keep size </textarea>
 </div>
