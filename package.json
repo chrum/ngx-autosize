@@ -1,6 +1,6 @@
 {
   "name": "ngx-autosize-app",
-  "version": "1.8.4",
+  "version": "1.8.6",
   "homepage": "https://chrum.it/pages/ngx-autosize",
   "description": "Directive that automatically adjusts textarea height to fit content",
   "repository": {
@@ -38,6 +38,7 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "~8.2.2",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "~8.2.2",
     "@angular/compiler": "~8.2.2",
     "@angular/core": "~8.2.2",
@@ -46,7 +47,7 @@
     "@angular/platform-browser-dynamic": "~8.2.2",
     "@angular/router": "~8.2.2",
     "core-js": "^2.6.9",
-    "ngx-autosize": "^1.8.3-next",
+    "ngx-autosize": "file:dist/autosize",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

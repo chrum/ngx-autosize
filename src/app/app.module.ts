@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AutosizeModule} from 'ngx-autosize';
 // import {AutosizeModule} from '../../projects/autosize/src/lib/autosize.module';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import {AutosizeModule} from 'ngx-autosize';
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        AutosizeModule
+        AutosizeModule,
+        DragDropModule
     ],
     providers: [],
     bootstrap: [AppComponent]
