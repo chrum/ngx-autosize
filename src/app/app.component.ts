@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 const longText = `Mega Man X, known in Japan as Rockman X,[a] is an action-platform video game developed and published by Capcom for the Super Nintendo Entertainment System (SNES).
         1
@@ -29,6 +30,15 @@ export class AppComponent implements OnInit {
     public dynamic: 'enabled' | 'disabled' = 'enabled';
 
     public showAreaInContainer = true;
+
+    public todo = [
+        'Get to work',
+        'Go home',
+    ];
+
+    public done = [
+        'Get up',
+    ];
 
     reactiveText = new FormControl(longText);
     reactiveForm = new FormGroup({
@@ -61,5 +71,20 @@ export class AppComponent implements OnInit {
 
     onResized(newHeight) {
         console.log(newHeight);
+    }
+
+
+
+    drop(event: CdkDragDrop<string[]>) {
+        if (event.previousContainer === event.container) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+            transferArrayItem(
+                event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex
+            );
+        }
     }
 }

@@ -165,9 +165,38 @@ is causing our cloned helper element some problems so...</textarea>
 
 <div style="text-align: center">
     <h3>Drag & Drop :)</h3>
-    <textarea autosize cdkDrag>
-        I should be draggable and no be throwing errors in the process.
-    </textarea>
+
+    <div class="drag-and-drop-container">
+        <h2>To do</h2>
+
+        <div
+            cdkDropList
+            #todoList="cdkDropList"
+            [cdkDropListData]="todo"
+            [cdkDropListConnectedTo]="[doneList]"
+            class="drag-and-drop-list"
+            (cdkDropListDropped)="drop($event)">
+            <textarea class="drag-and-drop-box" *ngFor="let item of todo" cdkDrag
+                      autosize
+                      [(ngModel)]="item"></textarea>
+        </div>
+    </div>
+
+    <div class="drag-and-drop-container">
+        <h2>Done</h2>
+
+        <div
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="done"
+            [cdkDropListConnectedTo]="[todoList]"
+            class="drag-and-drop-list"
+            (cdkDropListDropped)="drop($event)">
+            <textarea class="drag-and-drop-box" *ngFor="let item of done" cdkDrag
+                      autosize
+                      [(ngModel)]="item"></textarea>
+        </div>
+    </div>
 </div>
 
 <hr/>
