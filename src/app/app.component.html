@@ -10,6 +10,24 @@
 <hr/>
 
 <div>
+    <h3>Dynamic directive - <select [(ngModel)]="dynamic">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+    </select></h3>
+    <textarea *ngIf="dynamic === 'enabled'; else disabled"
+              [ngModel]="longText"
+              (resized)="onResized($event)"
+              [autosize]="true"></textarea>
+    <ng-template #disabled>
+        <textarea [ngModel]="longText"
+                  (resized)="onResized($event)"
+                  [autosize]="false"></textarea>
+    </ng-template>
+</div>
+
+<hr/>
+
+<div>
     <h3>Min rows <input [(ngModel)]="minRows"/></h3>
     <textarea autosize rows="1" [minRows]="minRows">1 row of text but it should keep size </textarea>
 </div>
