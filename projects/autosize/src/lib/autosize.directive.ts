@@ -22,7 +22,7 @@ export class AutosizeDirective implements OnDestroy, OnChanges, AfterContentChec
         }
     };
     @Input('autosize')
-    set _autosize(autosize: boolean) {
+    set _autosize(autosize: boolean | string) {
         this.autosize = typeof autosize === 'boolean'
             ? autosize
             : true;
