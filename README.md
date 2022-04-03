@@ -12,12 +12,12 @@ It adjusts the textarea height automatically to any text input, or changes to th
 Check the demo [here](https://chrum.it/pages/ngx-autosize)
 
 ## Installation:
-**angular 9+**
+**angular 12+**
 ```bash
 npm install ngx-autosize@next
 ```
 
-**for angular <9**
+**for angular <12**
 ```bash
 npm install ngx-autosize
 ```
