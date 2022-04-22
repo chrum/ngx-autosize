@@ -14,7 +14,7 @@ Check the demo [here](https://chrum.it/pages/ngx-autosize)
 ## Installation:
 
 ```bash
-npm install ngx-autosize
+npm install @techiediaries/ngx-textarea-autosize
 ```
 
 ## Use Example:
@@ -22,7 +22,7 @@ npm install ngx-autosize
 Add the declaration to your @NgModule:  
 **IMPORTANT !!!** you need to do it for every module that will be autosizing textareas ;)
 ```typescript
-import {AutosizeModule} from 'ngx-autosize';
+import {AutosizeModule} from '@techiediaries/ngx-textarea-autosize';
 
 ...
 
