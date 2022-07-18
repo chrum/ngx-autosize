@@ -1,174 +1,145 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-autosize-app": {
-      "root": "",
-      "sourceRoot": "src",
+    "ngx-autosize": {
+      "projectType": "library",
+      "root": "projects/ngx-autosize",
+      "sourceRoot": "projects/ngx-autosize/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-autosize/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-autosize/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-autosize/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-autosize/src/test.ts",
+            "tsConfig": "projects/ngx-autosize/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-autosize/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-autosize-demo": {
       "projectType": "application",
-      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
+      "root": "projects/ngx-autosize-demo",
+      "sourceRoot": "projects/ngx-autosize-demo/src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-autosize-app",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/ngx-autosize-demo",
+            "index": "projects/ngx-autosize-demo/src/index.html",
+            "main": "projects/ngx-autosize-demo/src/main.ts",
+            "polyfills": "projects/ngx-autosize-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngx-autosize-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/ngx-autosize-demo/src/favicon.ico",
+              "projects/ngx-autosize-demo/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/ngx-autosize-demo/src/styles.scss"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
-              ]
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-autosize-demo/src/environments/environment.ts",
+                  "with": "projects/ngx-autosize-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ngx-autosize-app:build"
-          },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-autosize-app:build:production"
+              "browserTarget": "ngx-autosize-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-autosize-demo:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-autosize-app:build"
+            "browserTarget": "ngx-autosize-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [],
+            "main": "projects/ngx-autosize-demo/src/test.ts",
+            "polyfills": "projects/ngx-autosize-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngx-autosize-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-autosize-demo/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "projects/ngx-autosize-demo/src/favicon.ico",
+              "projects/ngx-autosize-demo/src/assets"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "ngx-autosize-app-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-autosize-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ngx-autosize-app:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "ngx-autosize": {
-      "root": "projects/autosize",
-      "sourceRoot": "projects/autosize/src",
-      "projectType": "library",
-      "prefix": "ngx",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/autosize/tsconfig.lib.json",
-            "project": "projects/autosize/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/autosize/src/test.ts",
-            "tsConfig": "projects/autosize/tsconfig.spec.json",
-            "karmaConfig": "projects/autosize/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/autosize/tsconfig.lib.json",
-              "projects/autosize/tsconfig.spec.json"
+            "styles": [
+              "projects/ngx-autosize-demo/src/styles.scss"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "ngx-autosize-app"
+  "defaultProject": "ngx-autosize-demo"
 }

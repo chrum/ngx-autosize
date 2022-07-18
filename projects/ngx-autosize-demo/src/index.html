@@ -1,0 +1,161 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ngx-Autosize</title>
+  <meta name="description" content="Ngx-Autosize - Angular2+ directive that automatically adjusts textarea height to fit its content"/>
+  <meta name="author" content="Chrum.It"/>
+
+  <meta property="og:title" content="Ngx-snake"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://chrum.it/"/>
+  <meta property="og:description" content="Ngx-Autosize - Angular2+ directive that automatically adjusts textarea height to fit its content"/>
+  <meta property="og:image" content="image.png"/>
+
+  <link rel="icon" href="./assets/favicon.ico"/>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet"/>
+
+  <style>
+    html,
+    body {
+      position: relative;
+
+      height: 100%;
+      min-height: 2000px;
+
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+    //justify-content: space-between;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      min-height: 100px;
+    }
+
+    header .navbar-brand {
+      position: absolute;
+      top: 0;
+    }
+
+    header .navbar-brand img{
+      height: 52px;
+    }
+
+    section#main-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-violet {
+      color: #14121d;
+    }
+
+    .bg-violet {
+      background-color: #14121d;
+    }
+
+    .bg-header {
+      background-image: url('assets/bg/bg-header.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center center;
+      background-size: cover;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer p {
+      font-size: .8rem;
+    }
+
+    .bg-cover {
+      margin: 0 -12px; transform: rotate(180deg);
+    }
+
+    .bg-cover svg {
+      height: 32px;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body id="page-top bg-light">
+
+<header class="page-section text-violet">
+  <div class="container-fluid  px-5">
+    <a class="navbar-brand pt-3" href="https://chrum.it/" target="_blank">
+      <img class="text-violet" src="./assets/logo/logo.svg" alt="">
+      <!-- <img src="./img/logo/logo-invert.png" alt=""> -->
+    </a>
+    <div class="row text-center justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="" style="font-family: 'Kaushan Script', Sans-serif;">
+          ngx-autosize
+        </h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="main-body" class="page-section m-5 text-violet">
+  <div class="container">
+    <div class="row text-center justify-content-center">
+      <div class="col-lg-8 p-4">
+        <h2>ngx-autosize</h2>
+        <p>
+          is an Angular2+ directive that automatically adjusts textarea height to fit its content.
+        </p>
+
+        <app-root></app-root>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-section bg-violet text-light">
+  <div class="container-fluid">
+    <div class="bg-cover">
+      <svg color="#fff" fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"
+           preserveAspectRatio="none">
+        <path class="elementor-shape-fill" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"></path>
+      </svg>
+    </div>
+    <div class="row text-left">
+      <div class="col-lg-8 pt-3 px-5">
+        <p>
+          Białystok, Poland <br/>
+          +48 505 724 404 <br/>
+          chrystian@chrum.it <br/>
+          Mon. - Fri. 8AM - 6PM
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://github.com/chrum/ngx-autosize"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                     src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+                                                     alt="Fork me on GitHub"></a>
+
+
+</body>
