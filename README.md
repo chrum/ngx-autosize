@@ -14,12 +14,12 @@ Check the demo [here](https://chrum.it/pages/ngx-autosize)
 ## Installation:
 **angular 12+**
 ```bash
-npm install ngx-autosize@next
+npm install ngx-autosize
 ```
 
 **for angular <12**
 ```bash
-npm install ngx-autosize
+npm install ngx-autosize@1
 ```
 
 ## Use Example:
