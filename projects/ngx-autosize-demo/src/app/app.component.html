@@ -32,7 +32,7 @@
 
 <div>
   <h3>Min rows <input [(ngModel)]="minRows"/></h3>
-  <textarea autosize rows="1" [minRows]="minRows">1 row of text but it should keep size </textarea>
+  <textarea style="box-sizing: content-box; padding: 10px" autosize rows="1" [minRows]="minRows">1 row of text but it should keep size </textarea>
 </div>
 
 <hr/>
