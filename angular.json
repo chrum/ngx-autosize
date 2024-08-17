@@ -52,12 +52,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngx-autosize-demo",
+            "outputPath": {
+              "base": "dist/ngx-autosize-demo"
+            },
             "index": "projects/ngx-autosize-demo/src/index.html",
-            "main": "projects/ngx-autosize-demo/src/main.ts",
-            "polyfills": "projects/ngx-autosize-demo/src/polyfills.ts",
+            "polyfills": [
+              "projects/ngx-autosize-demo/src/polyfills.ts"
+            ],
             "tsConfig": "projects/ngx-autosize-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -67,7 +70,8 @@
             "styles": [
               "projects/ngx-autosize-demo/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/ngx-autosize-demo/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -92,9 +96,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -106,10 +108,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngx-autosize-demo:build:production"
+              "buildTarget": "ngx-autosize-demo:build:production"
             },
             "development": {
-              "browserTarget": "ngx-autosize-demo:build:development"
+              "buildTarget": "ngx-autosize-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -117,7 +119,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-autosize-demo:build"
+            "buildTarget": "ngx-autosize-demo:build"
           }
         },
         "test": {
@@ -140,6 +142,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ngx-autosize-demo"
+  }
 }
