@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 const longText = `Mega Man X, known in Japan as Rockman X,[a] is an action-platform video game developed and published by Capcom for the Super Nintendo Entertainment System (SNES).
@@ -40,9 +40,9 @@ export class AppComponent implements OnInit {
     'Get up',
   ];
 
-  reactiveText = new FormControl(longText);
-  reactiveForm = new FormGroup({
-    reactiveText: new FormControl(longText)
+  reactiveText = new UntypedFormControl(longText);
+  reactiveForm = new UntypedFormGroup({
+    reactiveText: new UntypedFormControl(longText)
   });
 
   ngOnInit(): void {
